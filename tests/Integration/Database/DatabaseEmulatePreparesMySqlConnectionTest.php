@@ -14,6 +14,7 @@ class DatabaseEmulatePreparesMySqlConnectionTest extends DatabaseMySqlConnection
         $app['config']->set('database.connections.testbench', [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
             'username' => 'root',
             'password' => 'password',
             'database' => 'forge',
