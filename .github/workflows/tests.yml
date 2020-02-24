@@ -16,7 +16,7 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: forge
-          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: forge
         ports:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -34,14 +34,6 @@ jobs:
     name: P${{ matrix.php }} - S${{ matrix.stability }}
 
     steps:
-      - name: Start MySQL
-        run: sudo /etc/init.d/mysql start
-
-      - name: Verify MySQL connection from host
-        run: |
-          sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -63,6 +55,9 @@ jobs:
 
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-suggest
+
+      - name: Start MySQL
+        run: sudo /etc/init.d/mysql start
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
