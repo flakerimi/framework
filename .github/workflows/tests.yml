@@ -63,4 +63,4 @@ jobs:
         env:
           CI: ${{ secrets.CI }}
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
-          DB_USER: root
+          DB_USERNAME: root
