@@ -15,7 +15,7 @@ class DatabaseEmulatePreparesMySqlConnectionTest extends DatabaseMySqlConnection
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'username' => 'root',
-            'password' => '',
+            'password' => 'password',
             'database' => 'forge',
             'prefix' => '',
             'options' => [
