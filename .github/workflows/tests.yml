@@ -63,3 +63,4 @@ jobs:
         run: vendor/bin/phpunit --verbose
         env:
           CI: ${{ secrets.CI }}
+          DB_HOST: localhost
